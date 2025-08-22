@@ -19,6 +19,6 @@ router.get("/:user_id", getTranscationByuserId);
 router.delete("/:id", delteTransaction);
 
 // summary transactions
-router.get("/:userId", summaryTransaction);
+router.get("/summary/:userId", summaryTransaction);
 
 export default router;

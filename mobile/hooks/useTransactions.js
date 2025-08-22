@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
-const API_URL = "http://localhost:5001/api/";
+const API_URL = "http://192.168.1.3:5001/api";
 
 export const useTransactions = (userId) => {
   const [transactions, setTransactions] = useState([]);
@@ -29,7 +29,7 @@ export const useTransactions = (userId) => {
     } catch (error) {
       console.log("Error fetching transactions summary:", error);
     }
-  });
+  }, [userId]);
   const loadData = useCallback(async () => {
     if (!userId) return;
 
@@ -56,4 +56,5 @@ export const useTransactions = (userId) => {
       Alert.alert("Error", error.message);
     }
   };
+  return { deleteTransaction, loadData, isLoading, transactions, Summary };
 };
