@@ -20,4 +20,14 @@ export const useTransactions = (userId) => {
       console.log("Error fetching transactions:", error);
     }
   }, [userId]);
+
+  const feachSummary = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_URL}/transactions/summary/${userId}`);
+      const data = await response.json();
+      setSummary(data);
+    } catch (error) {
+      console.log("Error fetching transactions summary:", error);
+    }
+  });
 };
