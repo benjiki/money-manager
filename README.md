@@ -1,19 +1,16 @@
-this project is called **Task Manager**, built with **React Native (Expo)** on the frontend and uses **Convex** for the backend, here’s a tailored **README.md** you can drop right into your repo:
+# 📱 React Native + Node.js Application
 
----
-
-# ✅ Task Manager
-
-A **cross-platform mobile application** built with **React Native (Expo)** for managing tasks efficiently.
-The backend is powered by **[Convex](https://convex.dev/)**, providing a serverless and real-time database solution.
+This project is a **mobile-first application** built with **React Native (Expo)** for the frontend and **Node.js** for the backend.
+It uses **PostgreSQL** hosted on **Neno** as the database. The API base URL and endpoints are managed in `mobile/constants/api.js`.
 
 ---
 
 ## 🚀 Tech Stack
 
-* **Frontend**: [React Native (Expo)](https://reactnative.dev/)
-* **Backend**: [Convex](https://convex.dev/)
-* **Language**: TypeScript
+- **Frontend**: [React Native (Expo)](https://reactnative.dev/)
+- **Backend**: [Node.js](https://nodejs.org/) + [Express](https://expressjs.com/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) (hosted on [Neno](https://neno.dev/))
+- **API Config**: Centralized in `mobile/constants/api.js`
 
 ---
 
@@ -21,38 +18,25 @@ The backend is powered by **[Convex](https://convex.dev/)**, providing a serverl
 
 ```
 .
-├── app/                    # App screens
-│   ├── (tabs)/             # Tab-based navigation
-│   │   ├── _layout.tsx
-│   │   ├── index.tsx
-│   │   └── settings.tsx
-│   └── _layout.tsx
+├── backend/                 # Node.js backend
+│   ├── src/                 # Application source (controllers, routes, services, etc.)
+│   ├── .env.example         # Example environment variables
+│   ├── package.json         # Backend dependencies
+│   └── ...
 │
-├── assets/                 # Fonts, images, styles
-│   ├── fonts/
-│   ├── images/
-│   └── styles/
+├── mobile/                  # React Native frontend
+│   ├── app/                 # App screens
+│   ├── assets/              # Images, fonts, static files
+│   ├── components/          # Reusable UI components
+│   ├── constants/           # API config (api.js) and other constants
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utilities and helper functions
+│   ├── App.js               # Entry point
+│   ├── package.json         # Mobile dependencies
+│   └── ...
 │
-├── components/             # Reusable UI components
-│   ├── DangerZone.tsx
-│   ├── EmptyState.tsx
-│   ├── Header.tsx
-│   ├── LodingSpinner.tsx
-│   ├── Preferences.tsx
-│   ├── ProgressStats.tsx
-│   └── Todoinput.tsx
-│
-├── convex/                 # Convex backend
-│   ├── _generated/         # Auto-generated Convex files
-│   ├── schema.ts           # Convex schema
-│   └── todos.ts            # Backend logic for tasks
-│
-├── hooks/                  # Custom React hooks
-│
-├── App.js                  # App entry point
-├── package.json            # Dependencies
-├── tsconfig.json           # TypeScript config
-└── README.md               # Documentation
+├── README.md                # Project documentation
+└── ...
 ```
 
 ---
@@ -62,81 +46,75 @@ The backend is powered by **[Convex](https://convex.dev/)**, providing a serverl
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/task-manager.git
-cd task-manager
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
 ```
 
 ---
 
-### 2. Install Dependencies
+### 2. Backend Setup
 
 ```bash
+cd backend
 npm install
 ```
 
----
+- Copy `.env.example` to `.env` and configure your variables:
 
-### 3. Configure Convex
+  ```env
+  DATABASE_URL=postgresql://username:password@host:port/database
+  PORT=5000
+  ```
 
-1. Install the Convex CLI (if not already):
+- Run backend server:
 
-   ```bash
-   npm install -g convex
-   ```
-
-2. Initialize Convex (first time only):
-
-   ```bash
-   npx convex dev
-   ```
-
-3. This will create a `.env.local` file in the project root with your Convex deployment URL and key.
-
-4. Make sure your `convex/schema.ts` defines your database schema, e.g.:
-
-   ```ts
-   import { defineSchema, defineTable } from "convex/schema";
-
-   export default defineSchema({
-     tasks: defineTable({
-       title: "string",
-       completed: "boolean",
-       createdAt: "number",
-     }),
-   });
-   ```
+  ```bash
+  npm start
+  ```
 
 ---
 
-### 4. Run the App
-
-Start the Expo development server:
+### 3. Mobile App Setup
 
 ```bash
-npx expo start
+cd mobile
+npm install
 ```
 
-* Press `a` → Run on Android
-* Press `i` → Run on iOS (Mac required)
-* Press `w` → Open in browser
+- Update `constants/api.js` with your backend API URL:
+
+  ```javascript
+  export const API_URL = "http://localhost:5000"; // or your deployed server URL
+  ```
+
+- Start the Expo app:
+
+  ```bash
+  npx expo start
+  ```
+
+- Run on device/emulator:
+
+  - Press `a` for Android
+  - Press `i` for iOS (Mac required)
 
 ---
 
 ## 🛠 Features
 
-* 📝 Add, edit, and delete tasks
-* ✅ Mark tasks as completed
-* 📊 Track progress with **ProgressStats**
-* ⚡ Real-time updates powered by **Convex**
-* 🎨 Clean and reusable UI components
+- 📲 Cross-platform mobile app with **React Native (Expo)**
+- 🌐 RESTful API with **Node.js + Express**
+- 🗄 PostgreSQL database hosted on **Neno**
+- 🔗 Centralized API configuration (`constants/api.js`)
+- 🧩 Modular structure for scalability (`components`, `hooks`, `lib`)
 
 ---
 
 ## 📌 Notes
 
-* Convex auto-generates backend files inside `convex/_generated` (do not edit manually).
-* Update `.env.local` if you redeploy or switch Convex environments.
-* Ensure TypeScript is enabled for type safety.
+- Ensure PostgreSQL on Neno is active before running the backend.
+- Use Expo Go app or emulator for quick testing.
+- Update `constants/api.js` when deploying to production.
 
 ---
 
