@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
-const API_URL = "http://192.168.1.3:5001/api";
+import { API_URL } from "../constants/api";
 
 export const useTransactions = (userId) => {
   const [transactions, setTransactions] = useState([]);
@@ -45,7 +45,7 @@ export const useTransactions = (userId) => {
 
   const deleteTransaction = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/transactions/${userId}`, {
+      const response = await fetch(`${API_URL}/transactions/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete transaction");
